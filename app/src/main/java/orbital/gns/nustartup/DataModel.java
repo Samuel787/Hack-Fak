@@ -1,7 +1,5 @@
 package orbital.gns.nustartup;
 
-import android.net.Uri;
-
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -15,18 +13,20 @@ public class DataModel implements Serializable {
     private String contact;
     public String name;
     public HashMap<String, String> members;
-    public String uid;
+    public String ownerUid;
+    public String dataModelUid;
 //    private Uri image;
 
-    public DataModel(String name, String description, String skills, String founder, String contact, String location){
+    public DataModel(String name, String description, String skills, String founder, String contact, String location, String ownerUid, String dataModelUid){
         this.name = name;
         this.description = description;
         this.skills = skills;
         this.founder = founder;
         this.contact = contact;
         this.location = location;
-        members = new HashMap<>();
-        uid = null;
+        this.members = new HashMap<>();
+        this.ownerUid = ownerUid;
+        this.dataModelUid = dataModelUid;
     }
 
     public DataModel() {

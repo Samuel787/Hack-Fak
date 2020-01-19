@@ -1,7 +1,6 @@
 package orbital.gns.nustartup;
 
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -114,11 +113,10 @@ public class CreateStartUp extends Fragment {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String postUUID = UUID.randomUUID().toString();
                 DataModel dataModel = new DataModel(startUpNameHolder.getText().toString(), startUpIdeaHolder.getText().toString()
                         , startupSkillsHolder.getText().toString(), startUpFounderHolder.getText().toString(),
-                        startUpContactHolder.getText().toString(), startUpLocationHolder.getText().toString());
-                dataModel.uid = uid;
-                String postUUID = UUID.randomUUID().toString();
+                        startUpContactHolder.getText().toString(), startUpLocationHolder.getText().toString(), uid, postUUID);
                 uploadPostToDatabase(dataModel, postUUID);
                 FirebaseDatabase.getInstance().getReference("/users/" + uid + "/organisations/" + postUUID).setValue(postUUID);
                 Toast.makeText(getActivity(), "Created", Toast.LENGTH_SHORT).show();

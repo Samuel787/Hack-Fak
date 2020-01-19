@@ -1,6 +1,5 @@
 package orbital.gns.nustartup;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,13 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.SearchView;
 
 
@@ -27,10 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.EventListener;
 
 
 public class FeedFragment extends Fragment {
@@ -100,19 +93,6 @@ public class FeedFragment extends Fragment {
         searchView = getView().findViewById(R.id.searchView);
         Log.d("Debug", "yo");
         dataModels = new ArrayList<>();
-        dataModels.add(new DataModel("NUSCats", "Passionate about cats", "asd", "Abhishake", "6969696969", "Mustafa"));
-//        dataModels.add(new DataModel("IceCats", "Passionate about cats", "Abhishake", "6969696969", "Little India"));
-//        dataModels.add(new DataModel("DuCats", "Passionate about cats", "Abhishake", "6969696969", "Queenstown"));
-//        dataModels.add(new DataModel("RishiCats", "Passionate about cats", "Abhishake", "6969696969", "Chinatown"));
-//        dataModels.add(new DataModel("AdamCats", "Passionate about cats", "Abhishake", "6969696969", "Changi"));
-//        dataModels.add(new DataModel("AbhiCats", "Passionate about cats", "Abhishake", "6969696969", "Chinese Garden"));
-//        dataModels.add(new DataModel("MuCats", "Passionate about cats", "Abhishake", "6969696969", "NUS"));
-//        dataModels.add(new DataModel("PiCats", "Passionate about cats", "Abhishake", "6969696969", "Technopark"));
-//        dataModels.add(new DataModel("DiCats", "Passionate about cats", "Abhishake", "6969696969", "Alexandra Park"));
-//        dataModels.add(new DataModel("JiCats", "Passionate about cats", "Abhishake", "6969696969", "I3"));
-//        dataModels.add(new DataModel("LiCats", "Passionate about cats", "Abhishake", "6969696969", "Utown"));
-//        dataModels.add(new DataModel("NuCats", "Passionate about cats", "Abhishake", "6969696969", "Lemon Engineering"));
-//        dataModels.add(new DataModel("MeowCats", "Passionate about cats", "Abhishake", "6969696969", "Intrachat"));
 
         retrieveData();
         Log.d("Debug",dataModels.size() + " ");
@@ -132,13 +112,16 @@ public class FeedFragment extends Fragment {
                 String mSkills = dataModels.get(position).skills;
                 String mLocation = dataModels.get(position).getLocation();
                 String mContact = dataModels.get(position).getContact();
-
+                String mOwnerUid = dataModels.get(position).ownerUid;
+                String mDataModelUid = dataModels.get(position).dataModelUid;
                 //Log.d("SamuelSamuel", );
                 args.putString("Name", mName);
                 args.putString("Description", mDescription);
                 args.putString("Skills", mSkills);
                 args.putString("Location", mLocation);
                 args.putString("Contact", mContact);
+                args.putString("OwnerUid", mOwnerUid);
+                args.putString("DataModelUid", mDataModelUid);
 
                 startUpInfo.setArguments(args);
                 transaction.replace(R.id.container, startUpInfo);
@@ -192,7 +175,7 @@ public class FeedFragment extends Fragment {
 //                                            Log.d("Debug", "Hello");
                                 DataModel dm = p0.getValue(DataModel.class);
                                 Log.d("Debug", dm.name);
-                                dataModels.add(new DataModel(dm.name, "Passionate about cats", "C++", "Abhishake", "6969696969", "Mustafa"));
+                                dataModels.add(new DataModel(dm.name, dm.getDescription(), dm.skills, dm.getFounder(), dm.getFounder(), dm.getLocation(),dm.ownerUid, dm.dataModelUid));
                                 CustomAdapter tempAdapter = new CustomAdapter(dataModels, getContext());
                                 listView.setAdapter(tempAdapter);
 
