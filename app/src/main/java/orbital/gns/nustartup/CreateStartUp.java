@@ -88,6 +88,17 @@ public class CreateStartUp extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         uid = user.getUid();
+
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_create_start_up, container, false);
+        setup(view);
+
         FirebaseDatabase.getInstance().getReference("/users/" + uid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -100,40 +111,34 @@ public class CreateStartUp extends Fragment {
 
                     }
                 });
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_start_up, container, false);
-        setup(view);
 
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("Debug", userProfile.name);
+                if(userProfile.name == null || userProfile.biography == null || userProfile.email == null
+                        || userProfile.password == null || userProfile.phoneNumber == null){
+                    Toast.makeText(getContext(), "Please update your profile first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 String postUUID = UUID.randomUUID().toString();
                 DataModel dataModel = new DataModel(startUpNameHolder.getText().toString(), startUpIdeaHolder.getText().toString()
                         , startupSkillsHolder.getText().toString(), startUpFounderHolder.getText().toString(),
                         startUpContactHolder.getText().toString(), startUpLocationHolder.getText().toString(), uid, postUUID);
-                uploadPostToDatabase(dataModel, postUUID);
                 FirebaseDatabase.getInstance().getReference("/users/" + uid + "/organisations/" + postUUID).setValue(postUUID);
                 Toast.makeText(getActivity(), "Created", Toast.LENGTH_SHORT).show();
+                dataModel.members.put(uid, userProfile.name);
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference("/posts/" + postUUID);
+                Log.d("Debug",dataModel.dataModelUid);
+                database.setValue(dataModel);
+
             }
         });
 
         return view;
     }
 
-    private void uploadPostToDatabase(DataModel dataModel, String postUUID) {
-        Log.d("Debug", userProfile.name);
-        dataModel.members.put(uid, userProfile.name);
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("/posts/" + postUUID);
-        database.setValue(dataModel);
-    }
-
-    private void setup(View view) {
+        private void setup(View view) {
         uploadButton = view.findViewById(R.id.submitButton);
         startUpNameHolder = view.findViewById(R.id.startUpNameHolder);
         startUpIdeaHolder = view.findViewById(R.id.startUpIdeaHolder);

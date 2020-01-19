@@ -13,7 +13,6 @@ public class User implements Serializable {
     public String phoneNumber;
     public String name;
     public String url;
-    public String URI;
     public HashMap<String, String> organisations;
     public HashMap<String, String> notifications;
 
@@ -42,7 +41,6 @@ public class User implements Serializable {
         this.phoneNumber = user.phoneNumber;
         this.name = user.name;
         this.url = user.url;
-        this.URI = user.URI;
         this.organisations = user.organisations;
         this.notifications = user.notifications;
     }

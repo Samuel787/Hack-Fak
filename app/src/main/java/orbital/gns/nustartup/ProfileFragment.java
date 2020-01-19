@@ -152,10 +152,6 @@ public class ProfileFragment extends Fragment {
         if (user.url != null) {
             linkedinTextView.setText(user.url);
         }
-        if (user.URI != null) {
-//            System.out.println("savgfgmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-            mImageView.setImageURI(Uri.parse(user.URI));
-        }
     }
 
     private void pickImageFromGallery() {
@@ -251,9 +247,6 @@ public class ProfileFragment extends Fragment {
         }
         if (!url.isEmpty()) {
             userProfile.url = url;
-        }
-        if (!imageURI.isEmpty()) {
-            userProfile.URI = imageURI;
         }
         FirebaseDatabase.getInstance().getReference("/users/" + uid)
             .setValue(userProfile);

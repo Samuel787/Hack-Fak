@@ -10,6 +10,16 @@ public class NotiModel implements Serializable {
     private String personName;
     private String companyName;
 
+    public String getMessageUser() {
+        return messageUser;
+    }
+
+    public void setMessageUser(String messageUser) {
+        this.messageUser = messageUser;
+    }
+
+    private String messageUser;
+
     public Boolean getWorker() {
         return isWorker;
     }
@@ -20,10 +30,11 @@ public class NotiModel implements Serializable {
 
     private Boolean isWorker;
 
-    public NotiModel(String personName, String companyName, Boolean isWorker){
+    public NotiModel(String personName, String companyName, Boolean isWorker, String messageUser){
         this.personName = personName;
         this.companyName = companyName;
         this.isWorker = isWorker;
+        this.messageUser = messageUser;
     }
 
     public NotiModel() {

@@ -55,6 +55,9 @@ public class GroupsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_groups, container, false);
     }
 
+    ArrayList<NotiModel> notiModels;
+    ListView listView;
+    private NotiAdapter notiAdapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
