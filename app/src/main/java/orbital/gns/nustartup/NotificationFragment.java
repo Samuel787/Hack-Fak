@@ -5,15 +5,26 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class NotificationFragment extends Fragment {
@@ -26,6 +37,12 @@ public class NotificationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String uid;
+
+    private TextView panel;
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -46,13 +63,36 @@ public class NotificationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        uid = user.getUid();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        panel = view.findViewById(R.id.panel);
+        FirebaseDatabase.getInstance().getReference("/users/" + uid + "/notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    panel.setText("No New Notifications");
+                    return;
+                }
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String messageUser = ds.getKey();
+                    //Do Something
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return view;
     }
 
     ArrayList<NotiModel> notiModels;

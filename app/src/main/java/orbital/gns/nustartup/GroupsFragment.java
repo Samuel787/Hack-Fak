@@ -52,77 +52,14 @@ public class GroupsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sms, container, false);
+        return inflater.inflate(R.layout.fragment_groups, container, false);
     }
 
-
-    ArrayList<DataModel> dataModels;
-    ListView listView;
-    SearchView searchView;
-    private static CustomAdapter adapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView = getView().findViewById(R.id.list);
-        searchView = getView().findViewById(R.id.searchView);
-        dataModels = new ArrayList<>();
-
-        dataModels.add(new DataModel("NUSCats", "Passionate about cats", "C++", "Abhishake", "6969696969", "Mustafa"));
-        dataModels.add(new DataModel("IceCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Little India"));
-        dataModels.add(new DataModel("DuCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Queenstown"));
-        dataModels.add(new DataModel("RishiCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Chinatown"));
-        dataModels.add(new DataModel("AdamCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Changi"));
-        dataModels.add(new DataModel("AbhiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Chinese Garden"));
-        dataModels.add(new DataModel("MuCats", "Passionate about cats","C++", "Abhishake", "6969696969", "NUS"));
-        dataModels.add(new DataModel("PiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Technopark"));
-        dataModels.add(new DataModel("DiCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Alexandra Park"));
-        dataModels.add(new DataModel("JiCats", "Passionate about cats", "C++", "Abhishake", "6969696969", "I3"));
-        dataModels.add(new DataModel("LiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Utown"));
-        dataModels.add(new DataModel("NuCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Lemon Engineering"));
-        dataModels.add(new DataModel("MeowCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Intrachat"));
-
-        adapter= new CustomAdapter(dataModels, getContext());
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-                transaction.replace(R.id.container, new StartUpInfo());
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                ArrayList<DataModel> searchedDataModels = new ArrayList<>();
-
-                for (int i = 0; i < adapter.getCount(); i++) {
-                    if (adapter.getItem(i).name.toLowerCase().contains(s.toLowerCase())) {
-                        searchedDataModels.add(adapter.getItem(i));
-                    }
-                }
-
-                for (int i = 0; i < searchedDataModels.size(); i++) {
-                    System.out.println(searchedDataModels.get(i).name);
-                }
-
-                CustomAdapter tempAdapter = new CustomAdapter(searchedDataModels, getContext());
-                listView.setAdapter(tempAdapter);
-
-                return false;
-            }
-        });
 
     }
 
