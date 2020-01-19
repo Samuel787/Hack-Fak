@@ -100,25 +100,6 @@ public class FeedFragment extends Fragment {
         searchView = getView().findViewById(R.id.searchView);
         Log.d("Debug", "yo");
         dataModels = new ArrayList<>();
-//<<<<<<< HEAD
-//
-//
-//
-//
-//        dataModels.add(new DataModel("NUSCats", "Passionate about cats", "C++", "Abhishake", "6969696969", "Mustafa"));
-//        dataModels.add(new DataModel("IceCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Little India"));
-//        dataModels.add(new DataModel("DuCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Queenstown"));
-//        dataModels.add(new DataModel("RishiCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Chinatown"));
-//        dataModels.add(new DataModel("AdamCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Changi"));
-//        dataModels.add(new DataModel("AbhiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Chinese Garden"));
-//        dataModels.add(new DataModel("MuCats", "Passionate about cats","C++", "Abhishake", "6969696969", "NUS"));
-//        dataModels.add(new DataModel("PiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Technopark"));
-//        dataModels.add(new DataModel("DiCats", "Passionate about cats","C++", "Abhishake", "6969696969", "Alexandra Park"));
-//        dataModels.add(new DataModel("JiCats", "Passionate about cats", "C++", "Abhishake", "6969696969", "I3"));
-//        dataModels.add(new DataModel("LiCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Utown"));
-//        dataModels.add(new DataModel("NuCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Lemon Engineering"));
-//        dataModels.add(new DataModel("MeowCats", "Passionate about cats", "C++","Abhishake", "6969696969", "Intrachat"));
-//=======
         dataModels.add(new DataModel("NUSCats", "Passionate about cats", "asd", "Abhishake", "6969696969", "Mustafa"));
 //        dataModels.add(new DataModel("IceCats", "Passionate about cats", "Abhishake", "6969696969", "Little India"));
 //        dataModels.add(new DataModel("DuCats", "Passionate about cats", "Abhishake", "6969696969", "Queenstown"));

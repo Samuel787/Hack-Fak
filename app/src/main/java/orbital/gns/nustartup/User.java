@@ -15,6 +15,8 @@ public class User implements Serializable {
     public String url;
     public String URI;
     public HashMap<String, String> organisations;
+    public HashMap<String, String> notifications;
+
 
     public User(String email, String password) {
         this.email = email;
@@ -25,6 +27,7 @@ public class User implements Serializable {
         this.name = null;
         this.url = null;
         this.organisations = new HashMap<>();
+        this.notifications = new HashMap<>();
     }
 
     public User() {
@@ -41,5 +44,6 @@ public class User implements Serializable {
         this.url = user.url;
         this.URI = user.URI;
         this.organisations = user.organisations;
+        this.notifications = user.notifications;
     }
 }

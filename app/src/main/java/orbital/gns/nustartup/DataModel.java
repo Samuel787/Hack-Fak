@@ -15,6 +15,7 @@ public class DataModel implements Serializable {
     private String contact;
     public String name;
     public HashMap<String, String> members;
+    public String uid;
 //    private Uri image;
 
     public DataModel(String name, String description, String skills, String founder, String contact, String location){
@@ -25,6 +26,7 @@ public class DataModel implements Serializable {
         this.contact = contact;
         this.location = location;
         members = new HashMap<>();
+        uid = null;
     }
 
     public DataModel() {

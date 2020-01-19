@@ -1,6 +1,7 @@
 package orbital.gns.nustartup;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,9 +117,11 @@ public class CreateStartUp extends Fragment {
                 DataModel dataModel = new DataModel(startUpNameHolder.getText().toString(), startUpIdeaHolder.getText().toString()
                         , startupSkillsHolder.getText().toString(), startUpFounderHolder.getText().toString(),
                         startUpContactHolder.getText().toString(), startUpLocationHolder.getText().toString());
+                dataModel.uid = uid;
                 String postUUID = UUID.randomUUID().toString();
                 uploadPostToDatabase(dataModel, postUUID);
                 FirebaseDatabase.getInstance().getReference("/users/" + uid + "/organisations/" + postUUID).setValue(postUUID);
+                Toast.makeText(getActivity(), "Created", Toast.LENGTH_SHORT).show();
             }
         });
 
